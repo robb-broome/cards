@@ -13,7 +13,7 @@ Requires Ruby 2.0 or greater, tested with Ruby 2.2.2p95.
  => 52
  ```
 
-###  You can also instantiate a Pinochle deck
+- You can also instantiate a Pinochle deck
 
 
 ```
@@ -75,7 +75,7 @@ Finished in 0.00555s
 20 tests, 22 assertions, 0 failures, 0 errors, 0 skips
 
 ```
-##I Play with the different objects
+## Play with the different objects
 
 You can fire up the environment using:
 ```
@@ -111,12 +111,21 @@ bundle exec rake env
      5 of Clubs,
      6 of Hearts,
      Jack of Diamonds,
-     
-[7] pry(main)> deck.draw.inspect
-=> ["2 of Clubs"]
-[8] pry(main)> deck.draw(3).inspect
-=> ["3 of Clubs", "4 of Clubs", "5 of Clubs"]
-[9] pry(main)>
+     ...
+  
+
+[16] pry(main)> deck = deck.shuffle
+=> #<Deck:0x007fbd891bc300
+ @rules= 
+ ...
+    
+[17] pry(main)> deck.draw.inspect
+=> ["King of Diamonds"]
+[18] pry(main)> deck.draw(3).inspect
+=> ["Jack of Diamonds", "7 of Diamonds", "4 of Hearts"]
+[19] pry(main)> deck.cards.count
+=> 48
+[20] pry(main)>
 
 
 >[9] pry(main)> cut_deck = deck.cut
@@ -134,10 +143,8 @@ bundle exec rake env
      4 of Hearts,
      ...
 
-[10] pry(main)> deck.cut.each {|cut_deck| puts cut_deck.class}
-Deck
-Deck
-     
+[10] pry(main)> deck.cut.map {|cut_deck| puts cut_deck.class}
+[Deck, Deck]     
 
 
 

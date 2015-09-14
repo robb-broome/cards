@@ -125,26 +125,13 @@ bundle exec rake env
 => ["Jack of Diamonds", "7 of Diamonds", "4 of Hearts"]
 [19] pry(main)> deck.cards.count
 => 48
-[20] pry(main)>
 
 
->[9] pry(main)> cut_deck = deck.cut
-=> [#<Deck:0x007fbd89050480
-  @rules=
-   #<ArbitraryRules:0x007fbd89050520
-    @cards=
-     [6 of Clubs,
-      7 of Clubs,
-      ...
-... #<Deck:0x007fbd890500e8
-  @rules=
-   #<ArbitraryRules:0x007fbd89050250
-    @cards=
-     4 of Hearts,
-     ...
-
-[10] pry(main)> deck.cut.map {|cut_deck| puts cut_deck.class}
+[20] pry(main)> deck.cut.map {|cut_deck| puts cut_deck.class}
 [Deck, Deck]     
+
+[21] pry(main)> deck.cut.map {|deck| deck.cards.count}
+=> [24, 24]
 
 
 

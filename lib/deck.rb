@@ -13,7 +13,8 @@ class Deck
 
   def cut
     card_count = cards.count
-    slices = cards.each_slice(card_count/2)
+    half = (card_count/2.0).ceil
+    slices = cards.each_slice(half)
     slices.map do |slice|
       Deck.new(ArbitraryRules.new slice)
     end

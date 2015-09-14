@@ -4,65 +4,85 @@ describe 'Deck' do
 
   let(:deck) {Deck.new FrenchRules.new}
 
-  it 'has an array of cards' do
-    deck.cards.must_be_instance_of Array
-  end
+  describe 'cards' do
+    it 'has an array of cards' do
+      deck.cards.must_be_instance_of Array
+    end
 
-  it 'has cards' do
-    deck.cards.first.must_be_instance_of Card
-  end
+    it 'has cards' do
+      deck.cards.first.must_be_instance_of Card
+    end
 
-  it 'has the right number of cards' do
-    deck.cards.count.must_equal 52
-  end
-
-  it 'draws the first card' do
-    initial_cards = deck.cards.dup
-    deck.draw.inspect.must_equal [initial_cards.first.face]
-  end
-
-  it 'then draws the second card' do
-    initial_cards = deck.cards.dup
-    deck.draw
-    deck.draw.inspect.must_equal [initial_cards[1].face]
-  end
-
-  it 'returns a card name when it draws' do
-    deck.draw.inspect.must_equal ['2 of Clubs']
-  end
-
-  it 'draws two cards' do
-    deck.draw(2).inspect.must_be_instance_of Array
-  end
-
-  it 'after a draw, there are fewer cards' do
-    initial_cards = deck.cards.dup
-    deck.draw
-    deck.cards.count.must_equal(initial_cards.count - 1)
-  end
-
-  it 'cuts equally' do
-    initial_count = deck.cards.count
-    deck.cut.each do |cut_deck|
-      cut_deck.cards.count.must_equal initial_count / 2
+    it 'has the right number of cards' do
+      deck.cards.count.must_equal 52
     end
   end
 
-  it 'cuts into two decks' do
-    deck.cut.each do |cut_deck|
-      cut_deck.must_be_instance_of Deck
+  describe 'drawing cards' do
+
+    it 'draws the first card' do
+      initial_cards = deck.cards.dup
+      deck.draw.inspect.must_equal [initial_cards.first.face]
+    end
+
+    it 'then draws the second card' do
+      initial_cards = deck.cards.dup
+      deck.draw
+      deck.draw.inspect.must_equal [initial_cards[1].face]
+    end
+
+    it 'returns a card name when it draws' do
+      deck.draw.inspect.must_equal ['2 of Clubs']
+    end
+
+    it 'draws two cards' do
+      deck.draw(2).inspect.must_be_instance_of Array
+    end
+
+    it 'after a draw, there are fewer cards' do
+      initial_cards = deck.cards.dup
+      deck.draw
+      deck.cards.count.must_equal(initial_cards.count - 1)
     end
   end
 
-  it 'shuffle returns a deck' do
-    deck.shuffle.must_be_instance_of Deck
+  describe 'cutting the deck' do
+    it 'handles dd numbers of cards' do
+      deck.draw
+      initial_count = deck.cards.count
+      card_count = 0
+      deck.cut.each do |cut_deck|
+        card_count += cut_deck.cards.count
+      end
+      card_count.must_equal initial_count
+    end
+
+    it 'results in equal decks' do
+      initial_count = deck.cards.count
+      deck.cut.each do |cut_deck|
+        cut_deck.cards.count.must_equal initial_count / 2
+      end
+    end
+
+    it 'cuts into two decks' do
+      deck.cut.each do |cut_deck|
+        cut_deck.must_be_instance_of Deck
+      end
+    end
   end
 
-  it 'shuffles the deck' do
-    original_cards = deck.cards.dup
-    shuffled_cards = deck.shuffle.cards.dup
-    # well, there is a chance they could equal. But you'd have to run this a few times.
-    original_cards.wont_equal shuffled_cards
+  describe 'shuffling' do
+
+    it 'returns a deck' do
+      deck.shuffle.must_be_instance_of Deck
+    end
+
+    it 'randomizes' do
+      original_cards = deck.cards.dup
+      shuffled_cards = deck.shuffle.cards.dup
+      # well, there is a chance they could equal. But you'd have to run this a few times.
+      original_cards.wont_equal shuffled_cards
+    end
   end
 
 end

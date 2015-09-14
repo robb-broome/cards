@@ -7,6 +7,8 @@ class Card
     @face = "#{rank} of #{suit}"
   end
 
+  alias_method :inspect, :face
+
   def <=> other
     value <=> other.value
   end

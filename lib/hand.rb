@@ -6,6 +6,6 @@ class Hand
   end
 
   def inspect
-    cards.map(&:face)
+    cards.map(&:inspect)
   end
 end

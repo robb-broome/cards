@@ -84,45 +84,35 @@ bundle exec rake env
 
 ## Example output
 ```
-bundle exec rake env
-> deck = Deck.new FrenchRules.new
-> deck.shuffle
-> => #<Deck:0x007fbd89539c08
- @rules=
-  #<ArbitraryRules:0x007fbd89539c30
-   @cards=
-    [6 of Spades,
-     8 of Diamonds,
-     Queen of Spades,
-     8 of Hearts,
-     8 of Clubs,
-     3 of Hearts,
-     Jack of Clubs,
-     2 of Spades,
-     10 of Clubs,
-     3 of Spades,
-     7 of Hearts,
-     4 of Diamonds,
-     7 of Diamonds,
-     3 of Clubs,
-     King of Diamonds,
-     Queen of Diamonds,
-     9 of Hearts,
-     5 of Clubs,
-     6 of Hearts,
-     Jack of Diamonds,
-     ...
-  
+$ bundle exec rake env
+
+[15] pry(main)> deck = Deck.new(FrenchRules.new)
+=> #<Deck:0x007fbd892dcf28 @rules=#<FrenchRules:0x007fbd892dcf78>>
 
 [16] pry(main)> deck = deck.shuffle
 => #<Deck:0x007fbd891bc300
- @rules= 
- ...
+ @rules=
+  #<ArbitraryRules:0x007fbd891bc3a0
+   @cards=
+    [King of Diamonds,
+     Jack of Diamonds,
+     7 of Diamonds,
+     4 of Hearts,
+     4 of Clubs,
+     Queen of Hearts,
+     6 of Clubs,
+     9 of Clubs,
+     King of Spades,
+     8 of Hearts,
+     ... more cards ...
+  
     
 [17] pry(main)> deck.draw.inspect
 => ["King of Diamonds"]
+
 [18] pry(main)> deck.draw(3).inspect
 => ["Jack of Diamonds", "7 of Diamonds", "4 of Hearts"]
+
 [19] pry(main)> deck.cards.count
 => 48
 

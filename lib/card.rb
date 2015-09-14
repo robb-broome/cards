@@ -7,7 +7,7 @@ class Card
     @face = "#{rank} of #{suit}"
   end
 
-  def <=> other_card
-    value <=> other_card.value
+  def <=> other
+    value <=> other.value
   end
 end

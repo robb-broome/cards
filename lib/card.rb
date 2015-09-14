@@ -1,15 +1,13 @@
 class Card
-  attr_accessor :rank, :suite
-  def initialize opts
-    @rank = opts[:rank]
-    @suit = opts[:suit]
+  include Comparable
+  attr_reader :face, :value
+
+  def initialize(value:, rank:, suit:)
+    @value = value
+    @face = "#{rank} of #{suit}"
   end
 
-  def name
-    "#{rank} of #{suit}"
-  end
-
-  def inspect
-    name
+  def <=> other_card
+    value <=> other_card.value
   end
 end

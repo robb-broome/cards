@@ -1,12 +1,25 @@
 class Deck
-  attr_reader :deck_type, :cards
+
+  extend Forwardable
+  def_delegator :@rules, :cards
 
   def initialize rules
-    @deck_type = rules
-    @cards = rules.cards.dup
+    @rules = rules
   end
 
-  def draw
-    cards.shift
+  def draw hits=1
+    Hand.new cards.shift(hits)
+  end
+
+  def cut
+    card_count = cards.count
+    slices = cards.each_slice(card_count/2)
+    slices.map do |slice|
+      Deck.new(ArbitraryRules.new slice)
+    end
+  end
+
+  def shuffle
+    Deck.new(ArbitraryRules.new cards.shuffle)
   end
 end
